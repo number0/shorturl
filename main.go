@@ -20,7 +20,7 @@ func main() {
 	)
 
 	flag.StringVar(&config, "config", "", "config file")
-	flag.StringVar(&dbpath, "dbpth", "urls.db", "Database path")
+	flag.StringVar(&dbpath, "dbpath", "urls.db", "Database path")
 	flag.StringVar(&bind, "bind", "0.0.0.0:8000", "[int]:<port> to bind to")
 	flag.Parse()
 
