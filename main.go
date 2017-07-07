@@ -8,8 +8,7 @@ import (
 )
 
 var (
-	db  *bolt.DB
-	cfg Config
+	db *bolt.DB
 )
 
 func main() {
@@ -31,5 +30,5 @@ func main() {
 	}
 	defer db.Close()
 
-	NewServer(bind, cfg).ListenAndServe()
+	NewServer(bind).ListenAndServe()
 }

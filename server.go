@@ -12,7 +12,6 @@ import (
 // Server ...
 type Server struct {
 	bind      string
-	config    Config
 	templates *templice.Template
 	router    *httprouter.Router
 }
@@ -82,10 +81,9 @@ func (s *Server) initRoutes() {
 }
 
 // NewServer ...
-func NewServer(bind string, config Config) *Server {
+func NewServer(bind string) *Server {
 	server := &Server{
 		bind:      bind,
-		config:    config,
 		router:    httprouter.New(),
 		templates: templice.New(rice.MustFindBox("templates")),
 	}

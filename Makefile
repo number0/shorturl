@@ -3,11 +3,14 @@
 all: dev
 
 dev: build
-	./shorturl -bind 127.0.0.1:8000
+	./shorturl
 
 build: clean
 	go get ./...
-	go build -o ./shorturl .
+	go build .
+
+test:
+	go test ./...
 
 clean:
-	rm -rf bin shorturl
+	rm -rf shorturl
