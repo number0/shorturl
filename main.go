@@ -8,18 +8,21 @@ import (
 )
 
 var (
-	db *bolt.DB
+	cfg Config
+	db  *bolt.DB
 )
 
 func main() {
 	var (
-		config string
-		dbpath string
-		bind   string
+		config  string
+		dbpath  string
+		baseurl string
+		bind    string
 	)
 
 	flag.StringVar(&config, "config", "", "config file")
 	flag.StringVar(&dbpath, "dbpath", "urls.db", "Database path")
+	flag.StringVar(&baseurl, "baseurl", "", "Base URL for display purposes")
 	flag.StringVar(&bind, "bind", "0.0.0.0:8000", "[int]:<port> to bind to")
 	flag.Parse()
 
@@ -30,5 +33,8 @@ func main() {
 	}
 	defer db.Close()
 
-	NewServer(bind).ListenAndServe()
+	// TODO: Abstract the Config and Handlers better
+	cfg.baseURL = baseurl
+
+	NewServer(bind, cfg).ListenAndServe()
 }
