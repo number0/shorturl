@@ -5,7 +5,8 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/prologic/shorturl)](https://goreportcard.com/report/github.com/prologic/shorturl)
 [![Coverage](https://coveralls.io/repos/prologic/shorturl/badge.svg)](https://coveralls.io/r/prologic/shorturl)
 
-shorturl is a web app that allows you to create smart bookmarks, commands and aliases by pointing your web browser's default search engine at a running instance. Similar to bunny1 or yubnub.
+shorturl is a web app that allows you to create short urls of much longer more
+complex urls for easier sharing or embedding.
 
 ## Installation
 
@@ -16,6 +17,8 @@ $ go install github.com/prologic/shorturl/...
 ```
 
 ### OS X Homebrew
+
+**Coming soon**
 
 There is a formula provided that you can tap and install from
 [prologic/homebrew-shorturl](https://github.com/prologic/homebrew-shorturl):
@@ -37,12 +40,19 @@ much appreciated and highly welcome!
 Run shorturl:
 
 ```#!bash
-$ shorturl -bind 127.0.0.1:8000
+$ shorturl
 ```
 
-Set your browser's default shorturl engine to http://localhost:8000/?q=%s
+Then visit: http://localhost:8000/
 
-Then type `help` to view the main help page, `g foo bar` to perform a [Google](https://google.com) search for "foo bar" or `list` to list all available commands.
+## Configuration
+
+By default shorturl stores urls in `urls.db` in the local directory. This can
+be configured with the `-dbpath /path/to/urls.db` option.
+
+shorturl also displays an absolute url after creating and uses the value of
+`-baseurl` (*default: `""`*) for display purposes. This is useful for copying
+and pasting the shorturl.
 
 ## License
 
