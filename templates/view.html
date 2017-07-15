@@ -3,8 +3,40 @@
   <div class="columns">
     <div class="column">
        <p>Your short url is: <a href="/r/{{.ID}}">{{.ID}}</a></p>
-       <code>{{.URL}}</code>
+       <div class="form-group input-group">
+         <input class="form-input" id="input-url" value="{{.URL}}" readonly />
+         <button class="btn btn-primary hide" id="btn-copy" data-clipboard-target="#input-url">Copy</button>
+       </div>
     </div>
   </div>
 </section>
+{{end}}
+{{define "scripts"}}
+<script src="/js/jquery.min.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script>
+$(document).ready(function() {
+  var clipboard = new Clipboard('.btn');
+
+  var displayTooltip = function(element, text, timeout) {
+    $(element).addClass("tooltip tooltip-bottom");
+    $(element).attr("data-tooltip", text);
+    setTimeout(function () {
+      $(element).removeClass("tooltip tooltip-bottom");
+      $(element).removeAttr("data-tooltip");
+    }, timeout || 3000);
+  };
+
+  clipboard.on("success", function(e) {
+    e.clearSelection();
+    displayTooltip("#btn-copy", "Copied!");
+  });
+
+  clipboard.on('error', function(e) {
+    displayTooltip("#btn-copy", "Error!");
+  });
+
+  $("#btn-copy").removeClass("hide");
+});
+</script>
 {{end}}
